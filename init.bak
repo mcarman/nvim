@@ -1,0 +1,66 @@
+vim.cmd("set expandtab")
+vim.cmd("set tabstop=2")
+vim.cmd("set softtabstop=2")
+vim.cmd("set shiftwidth=2")
+vim.g.leader= " "
+vim.g.maplocalleader= "\\"
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {
+    -- import your plugins
+    { import = "plugins" },
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "habamax" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})
+
+local opts = {}
+
+local plugins = {
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { 
+      "nvim-telescope/telescope.nvim", tag = "0.1.6",
+      dependencies = { "nvim-lua/plenary.nvim" }
+    },
+  {"nvim-treesitter/nvim-treesitter", build= ":TSUpdate"}
+}
+--local macchiato = require("catppuccin.palettes").get_palette "macchiato"
+
+require("lazy").setup(plugins, opts)
+
+--require catppuccin and set the color scheme to catppuccin
+require("catppuccin").setup({
+  default_integrations = true,
+  compile_path = vim.fn.stdpath "cache" .. "/catppuccin",
+})
+vim.o.termguicolors = true
+colorscheme = "catppuccin-macchiato"
+vim.cmd.colorscheme "catppuccin"
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<leader>gr', builtin.live_grep, {})
+
+local config = require("nvim-treesitter.configs")
+config.setup({
+  ensure_installed = {"lua", "javascript", "yaml"},
+  highlight = { enable = true },
+  indent = { enable = true }
+})

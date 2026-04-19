@@ -1,0 +1,7 @@
+tignore for nvim repo
+
+3 bakup files
+.bak
+.kickstart
+
+lazy-lock.json
