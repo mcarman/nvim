@@ -11,3 +11,6 @@ end, { desc = "Format current file" })
 
 -- Map <leader>fp to open projects
 vim.keymap.set("n", "<leader>fp", ":ProjectFzf<CR>", { noremap = true, silent = true })
+
+-- Automatically copy to clipboard when mouse selection ends
+vim.keymap.set('v', '<LeftRelease>', '"*y', { noremap = true, silent = true })

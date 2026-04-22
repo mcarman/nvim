@@ -1,7 +1,14 @@
-tignore for nvim repo
+# .gitignore for nvim repo
+# supplement to global .gitignore
 
-3 bakup files
+# bakup files
 .bak
 .kickstart
 
+# pseudo log file
 lazy-lock.json
+
+# indexing bits
+*Zone.Identifier
+
+

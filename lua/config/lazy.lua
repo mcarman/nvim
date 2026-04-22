@@ -39,3 +39,8 @@ require("config.keymaps")
 
 -- For video recording purposes
 vim.cmd("ShowkeysToggle")
+
+-- for clipboard use in wsl
+-- requires win32yank.exe installation on windows
+-- see: https://code-examples.net/en/q/4be6205/the-ultimate-guide-to-mouse-selection-and-clipboard-sharing-in-neovim
+vim.opt.clipboard = "unnamedplus"
