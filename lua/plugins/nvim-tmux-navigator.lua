@@ -1,3 +1,7 @@
+-- this allows moving between panes and
+-- windows in both nvim and tmux.  Seamlessly
+-- https://github.com/christoomey/vim-tmux-navigator
+
 return {
 	"christoomey/vim-tmux-navigator",
 	cmd = {
